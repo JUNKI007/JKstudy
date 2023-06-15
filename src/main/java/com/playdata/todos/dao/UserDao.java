@@ -1,54 +1,86 @@
 package com.playdata.todos.dao;
+
 import com.playdata.todos.config.JdbcConnection;
+import com.playdata.todos.config.LogoutThread;
 import com.playdata.todos.dto.User;
-import javax.jws.soap.SOAPBinding;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 public class UserDao {
+    public static User me;
     public void insert(User user){
         Connection conn = new JdbcConnection().getJdbc();
-        String sql = "insert into users(username, password, name) values (?, ?, ?);";
+        String sql = "insert into users(username, password, name) " +
+                "values(?, ? ,?)";
         try {
-            PreparedStatement psmt = conn.prepareStatement(sql);
-            psmt.setString(1, user.getUsername());
-            psmt.setString(2, user.getPassword());
-            psmt.setString(3, user.getName());
-            psmt.executeUpdate();
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, user.getUsername());
+            pst.setString(2, user.getPassword());
+            pst.setString(3, user.getName());
+            pst.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-    public boolean login(String username, String password){
+    public boolean login(String id, String password){
         List<User> users = new ArrayList<User>();
         Connection conn = new JdbcConnection().getJdbc();
-        String sql = "select * from users where username = ? and password = ?";
+        String sql = "select id, username, name, create_at " +
+                "from users " +
+                "where username = ? and password = ?";
         try {
-            PreparedStatement psmt = conn.prepareStatement(sql);
-            psmt.setString(1, username);
-            psmt.setString(2, password);
-            ResultSet resultSet = psmt.executeQuery();
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, id);
+            pst.setString(2, password);
+            ResultSet resultSet = pst.executeQuery();
             while (resultSet.next()){
                 users.add(makeUser(resultSet));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return users.size() != 0;
-    }
-    private User makeUser(ResultSet resultSet){
-        try {
-            int id1 = resultSet.getInt("id");
-            String password = resultSet.getString("password");
-            String username = resultSet.getString("username");
-            String name = resultSet.getString("name");
-            String createAt = resultSet.getString("create_at");
-            return new User(id1, username, name, password, createAt);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        if(users.size() != 0){
+            me = users.get(0);
+            new LogoutThread().start();
+            return true;
         }
+        return false;
+    }
+
+
+    private User makeUser(ResultSet resultSet){
+        Integer id;
+        String password, username, name, createAt;
+        try {
+            id = resultSet.getInt("id");
+        }catch (SQLException e) {
+            id = null;
+        }
+        try {
+            password = resultSet.getString("password");
+        }catch (SQLException e) {
+            password = null;
+        }
+        try {
+            username = resultSet.getString("username");
+        }catch (SQLException e) {
+            username = null;
+        }
+        try {
+            name = resultSet.getString("name");
+        }catch (SQLException e) {
+            name = null;
+        }
+        try {
+            createAt = resultSet.getString("createAt");
+        }catch (SQLException e) {
+            createAt = null;
+        }
+        return new User(id,username,name,password,createAt);
     }
 }
