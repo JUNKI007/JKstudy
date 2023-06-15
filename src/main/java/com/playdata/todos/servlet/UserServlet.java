@@ -10,21 +10,22 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setStatus(200);
-        req.getRequestDispatcher("views/user.html").forward(req,resp);
+        req.getRequestDispatcher("views/user.html").forward(req, resp);
+        super.doGet(req, resp);
     }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
-        String password  = req.getParameter("password");
+        String password = req.getParameter("password");
         String name = req.getParameter("name");
-        System.out.println(username);
-        System.out.println(password);
-        System.out.println(name);
-        User user = new User("id");
+//        System.out.println(username); // insert
+//        System.out.println(password);
+//        System.out.println(name);
+        User user = new User(null,username,password,name,null);
         UserDao userDao = new UserDao();
         userDao.insert(user);
-        resp.sendRedirect("/login");
         resp.setStatus(201);
+        resp.sendRedirect("/login"); //  doPost -> doPost에서 받은 값을 sendRedirect로 보내서 -> doGet으로 받아줌
 //        super.doPost(req, resp);
     }
 }
