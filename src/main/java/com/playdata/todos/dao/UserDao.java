@@ -1,16 +1,12 @@
 package com.playdata.todos.dao;
-
 import com.playdata.todos.config.JdbcConnection;
-import com.playdata.todos.config.LogoutThread;
 import com.playdata.todos.dto.User;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 public class UserDao {
     public static User me;
     public void insert(User user){
@@ -27,7 +23,7 @@ public class UserDao {
             throw new RuntimeException(e);
         }
     }
-    public boolean login(String id, String password){
+    public User login(String id, String password){
         List<User> users = new ArrayList<User>();
         Connection conn = new JdbcConnection().getJdbc();
         String sql = "select id, username, name, create_at " +
@@ -46,13 +42,11 @@ public class UserDao {
         }
         if(users.size() != 0){
             me = users.get(0);
-            new LogoutThread().start();
-            return true;
+//            new LogOutThread().start();
+            return users.get(0);
         }
-        return false;
+        return null;
     }
-
-
     private User makeUser(ResultSet resultSet){
         Integer id;
         String password, username, name, createAt;
@@ -77,10 +71,19 @@ public class UserDao {
             name = null;
         }
         try {
-            createAt = resultSet.getString("createAt");
+            createAt = resultSet.getString("create_at");
         }catch (SQLException e) {
             createAt = null;
         }
-        return new User(id,username,name,password,createAt);
+        return new User(id,username,password,name,createAt);
     }
 }
+
+
+
+
+
+
+
+
+
