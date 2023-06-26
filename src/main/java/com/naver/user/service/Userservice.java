@@ -1,26 +1,10 @@
 package com.naver.user.service;
 
+import com.naver.user.domain.dto.User;
+import com.naver.user.domain.request.LoginRequest;
+import com.naver.user.domain.request.SignupRequest;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-
-@Service
-public class UserService {
-    public UserService() {
-        System.out.println("----------------- UserService--------------");
-    }
-
-    int count = 0;
-    public int test(){
-        count++;
-        return count;
-    }
-    @Bean
-    public int getCount(){
-        System.out.println("----------------- get Count --------------");
-        count++;
-        return 1000;
-    }
-
+public interface UserService {
+    User login(LoginRequest request);
+    boolean signup(SignupRequest request);
 }
