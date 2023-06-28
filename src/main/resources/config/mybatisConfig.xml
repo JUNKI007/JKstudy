@@ -6,5 +6,7 @@
     <typeAliases>
         <typeAlias type="com.naver.user.domain.entity.TodoJoinUser"
                    alias="TodoJoinUser" />
+        <typeAlias type="com.naver.user.domain.entity.User"
+                   alias="User" />
     </typeAliases>
 </configuration>

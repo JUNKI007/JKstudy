@@ -1,6 +1,6 @@
 package com.naver.user.service;
 
-import com.naver.user.domain.dto.User;
+import com.naver.user.domain.entity.User;
 import com.naver.user.domain.request.LoginRequest;
 import com.naver.user.domain.request.SignupRequest;
 
