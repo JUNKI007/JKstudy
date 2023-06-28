@@ -14,6 +14,7 @@
 <form method="post" action="/user/signup">
   <input type="text" name="id">
   <input type="text" name="pw">
+  <input type="text" name="name">
   <input type="submit" value="signup">
 </form>
 </body>

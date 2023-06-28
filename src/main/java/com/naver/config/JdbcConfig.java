@@ -3,11 +3,12 @@ package com.naver.config;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 
-//@Component
+//@Configuration
 public class JdbcConfig {
     private final String url = "jdbc:mysql://localhost:3306/todos" +
             "?serverTimezone=Asia/Seoul&characterEncoding=UTF-8";
