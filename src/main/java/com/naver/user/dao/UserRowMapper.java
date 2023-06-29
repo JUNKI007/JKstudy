@@ -1,6 +1,6 @@
 package com.naver.user.dao;
 
-import com.naver.user.domain.dto.User;
+import com.naver.user.domain.entity.User;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

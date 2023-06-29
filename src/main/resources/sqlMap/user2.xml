@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="user">
+<mapper namespace="com.naver.user.dao.UserMapper2">
     <select id="login" resultType="User">
         select
             *
@@ -13,4 +13,12 @@
         insert into users (username, password, name)
         values (#{id}, #{pw}, #{name})
     </insert>
+    <update id="update">
+        update users
+        <set>
+            <if test="name != ''">name=#{name}</if>
+            <if test="password != ''">password=#{password}</if>
+        </set>
+        where id = #{id}
+    </update>
 </mapper>

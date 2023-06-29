@@ -11,12 +11,12 @@
     <title>Title</title>
 </head>
 <body>
-<form method="post" action="/user/login">
-    <input type="text" name="id" >
-    <input type="text" name="password">
-    <input type="checkbox" name="idSave" value="true">
-    <input type="submit" value="로그인">
-</form>
-<a href="/user/signup">회원가입</a>
+    <form method="post" action="/user/login">
+        <input type="text" name="id" >
+        <input type="text" name="password">
+        <input type="checkbox" name="idSave" value="true">
+        <input type="submit" value="로그인">
+    </form>
+    <a href="/user/signup">회원가입</a>
 </body>
 </html>

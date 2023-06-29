@@ -5,9 +5,9 @@
     <title>Title</title>
 </head>
 <body>
-  <form method="post" action="/todo/update">
-    <input type="number" value="${todoid}" name="id">
-    <input type="text" value="${content}" name="content">
+  <form method="post" action="/user/update">
+    <input type="text" value="${password}" name="password">
+    <input type="text" value="${name}" name="name">
     <input type="submit">
   </form>
 </body>

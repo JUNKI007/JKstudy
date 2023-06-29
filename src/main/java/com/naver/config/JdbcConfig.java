@@ -14,7 +14,7 @@ public class JdbcConfig {
             "?serverTimezone=Asia/Seoul&characterEncoding=UTF-8";
     private final String username = "root";
     private final String password = "1q2w3e4r!!";
-    //    @Bean
+//    @Bean
     public DataSource dataSource(){
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");

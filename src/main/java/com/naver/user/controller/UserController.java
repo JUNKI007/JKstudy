@@ -1,7 +1,9 @@
 package com.naver.user.controller;
+import com.naver.user.domain.dto.UserUpdate;
 import com.naver.user.domain.entity.User;
 import com.naver.user.domain.request.LoginRequest;
 import com.naver.user.domain.request.SignupRequest;
+import com.naver.user.domain.request.UserUpdateRequest;
 import com.naver.user.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -27,12 +29,23 @@ public class UserController {
     public String getSignup(){
         return "/user/signup";
     }
+    @GetMapping("/update")
+    public ModelAndView showUpdatePage(
+            HttpSession session,
+            ModelAndView mav
+    ) {
+//        Integer id = (Integer) session.getAttribute("id");
+//        mav.addObject("id", id);
+
+        mav.setViewName("/user/userupdate");
+        return mav;
+    }
     @PostMapping("/login")
     public ModelAndView postLogin(
-            @ModelAttribute LoginRequest request
+             @ModelAttribute LoginRequest request
             , ModelAndView mav
             , HttpSession session
-    ){
+          ){
 //        if(idSave==null) idSave = false;
         User login = userService.login(request);
         if(login != null){
@@ -59,6 +72,20 @@ public class UserController {
         }else {
             mav.setViewName("redirect:/user/signup");
         }
+        return mav;
+    }
+
+    @PostMapping("/update")
+    public ModelAndView updateData(
+            @ModelAttribute UserUpdateRequest request,
+            HttpSession session,
+            ModelAndView mav
+            ) {
+        Integer id = (Integer) session.getAttribute("id");
+        UserUpdate dto = request.toDto(id);
+        userService.update(dto);
+        mav.setViewName("redirect:/user/login");
+
         return mav;
     }
 
