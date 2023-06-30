@@ -13,7 +13,7 @@
             <a href="/main">main</a>
         </td>
         <td>
-            <a href="/login">logout</a>
+            <a href="/user/login">logout</a>
         </td>
     </tr>
 </table>

@@ -17,7 +17,7 @@
         on t.user_id = u.id
 
     </select>
-    <select id="findByKeyword" resultType="TodoJoinUser" parameterType="String">
+    <select id="findByKeyword" resultType="TodoJoinUser">
         select
         t.id,
         t.create_at,
@@ -44,5 +44,18 @@
         update todos
         set content = #{content}
         where id = #{id} and user_id = #{uid}
+    </update>
+    <update id="updateHearts">
+        update todos
+        set heart =
+        <choose>
+            <when test="result == 0">
+                heart + 1
+            </when>
+            <otherwise>
+                heart - 1
+            </otherwise>
+        </choose>
+        where id = #{tid}
     </update>
 </mapper>

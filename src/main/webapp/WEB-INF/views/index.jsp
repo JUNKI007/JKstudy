@@ -1,17 +1,12 @@
-<%@ page language="java" pageEncoding="UTF-8"
-         contentType="text/html; charset=UTF-8"
-%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
-<%--<head>--%>
-<%--    <meta charset="UTF-8">--%>
-<%--</head>--%>
 <body>
-<h2>Hello World! 안녕 월드</h2>
-<p>${serverTime}</p>
-<form method="post" action="/user/test2">
-    <input name="id">
-    <input name="pw">
-    <input type="submit">
-</form>
+<h2>Hello World!ddd</h2>
+<c:forEach items="${keys}" var="key">
+    <p>key : ${key}</p>
+    <p>value : ${map.get(key)}</p>
+</c:forEach>
+
 </body>
 </html>

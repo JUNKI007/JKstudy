@@ -21,6 +21,12 @@
                     <a href="/todo/update?todoid=${todo.id}">수정</a>
                 </td>
             </c:if>
+            <td>
+                <form method="post" action="/todo/like">
+                    <input type="hidden" name="todoid" value="${todo.id}">
+                    <input type="submit" value="${todo.heart}">
+                </form>
+            </td>
         </tr>
     </c:forEach>
 

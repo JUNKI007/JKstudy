@@ -1,5 +1,6 @@
 package com.naver.user.dao;
 
+import com.naver.user.domain.entity.NewTodoJoinUser;
 import com.naver.user.domain.entity.TodoJoinUser;
 import org.apache.ibatis.annotations.Mapper;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -20,4 +21,9 @@ public class TodoMapper {
         return sessionTemplate.selectList("todo.findByKeyword",
                 "%"+keyword+"%");
     }
+    public List<NewTodoJoinUser> findAllHearts(){
+        return sessionTemplate.selectList("todo.findTodoById");
+    }
+
+
 }
