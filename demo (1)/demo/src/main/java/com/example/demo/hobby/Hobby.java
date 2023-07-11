@@ -1,13 +1,13 @@
 package com.example.demo.hobby;
 
+
 import com.example.demo.member.Member;
+import com.example.demo.member.MemberResponse;
 import com.example.demo.store.Store;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 
 @NoArgsConstructor
 @Getter
@@ -17,7 +17,8 @@ public class Hobby {
     private Member member;
 
     public Hobby(Integer id, String name, Member member) {
-        this.id = Store.hobbyIndex++;
+        if(id == null) this.id = Store.hobbyIndex++;
+        else this.id = id;
         this.name = name;
         this.member = member;
     }

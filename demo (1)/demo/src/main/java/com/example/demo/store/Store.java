@@ -9,6 +9,6 @@ public class Store {
     public static Integer memberIndex = 0;
 
     public static List<Hobby> hobbies = new ArrayList<>();
-    public static Integer hobbyIndex - 0;
+    public static Integer hobbyIndex = 0;
 
 }
