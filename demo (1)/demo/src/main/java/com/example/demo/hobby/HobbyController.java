@@ -15,4 +15,8 @@ public class HobbyController {
     public void save(@RequestBody HobbyRequest request){
         service.save(request);
     }
+
+
+
+
 }

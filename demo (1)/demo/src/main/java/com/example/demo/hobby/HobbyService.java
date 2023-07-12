@@ -3,6 +3,7 @@ package com.example.demo.hobby;
 
 import com.example.demo.member.Member;
 import com.example.demo.member.MemberService;
+import com.example.demo.store.MemberHobby;
 import com.example.demo.store.Store;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -16,12 +17,24 @@ import java.util.List;
 public class HobbyService {
     private final MemberService memberService;
     public void save(HobbyRequest request){
-        Member byId = memberService.findById(request.getMemberId());
-        Hobby hobby = new Hobby(null, request.getName(), byId);
+//        Member byId = memberService.findById(request.getMemberId());
+        Hobby hobby = new Hobby(null, request.getName(), null);
         Store.hobbies.add(hobby);
-        byId.getHobbies().add(hobby);
+//        byId.getHobbies().add(hobby);
     }
-//    public List<Hobby> findAll(){
-//        return h
+    public void connect(ConnectRequest request){
+        Member member = memberService.findById(request.memberId());
+        Hobby hobby = Store.hobbies
+                .stream()
+                .filter(h-> h.getId().equals(request.hobbyId()))
+                .findFirst()
+                .get();
+        new MemberHobby(member, hobby);
+    }
+
+//    public List<HobbyResponse> findByLikeName(String name){
+//
 //    }
+
+
 }

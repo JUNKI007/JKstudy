@@ -1,6 +1,7 @@
 package com.example.demo.member;
 
 import com.example.demo.hobby.Hobby;
+import com.example.demo.store.MemberHobby;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,6 +27,7 @@ public class MemberResponse {
 //        }
         this.hobbies = member.getHobbies()
                 .stream()
+                .map(MemberHobby::getHobby)
                 .map(HobbyDto::new)
                 .toList();
 

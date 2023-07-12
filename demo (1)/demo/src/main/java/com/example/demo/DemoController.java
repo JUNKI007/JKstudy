@@ -82,7 +82,7 @@ public class DemoController {
 
 
 
-    @PutMapping("{name")
+    @PutMapping("{name}")
     public void update(
             @PathVariable("name") String name,
             @RequestBody User user
