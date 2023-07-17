@@ -20,7 +20,7 @@ public class Hobby {
     private String name;
     private List<MemberHobby> members;
 
-    public Hobby(Integer id, String name, Member member) {
+    public Hobby(Integer id, String name) {
         if(id == null) this.id = Store.hobbyIndex++;
         else this.id = id;
         this.name = name;

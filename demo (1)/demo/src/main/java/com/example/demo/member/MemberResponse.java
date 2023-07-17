@@ -33,7 +33,7 @@ public class MemberResponse {
 
     }
     @Getter @AllArgsConstructor @NoArgsConstructor
-    class HobbyDto{
+    public class HobbyDto{
         private Integer id;
         private String name;
         public HobbyDto(Hobby hobby){

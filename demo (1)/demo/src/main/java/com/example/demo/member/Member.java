@@ -1,6 +1,5 @@
 package com.example.demo.member;
 
-import com.example.demo.hobby.Hobby;
 import com.example.demo.store.MemberHobby;
 import com.example.demo.store.Store;
 import lombok.AllArgsConstructor;

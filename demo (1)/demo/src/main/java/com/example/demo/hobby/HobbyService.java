@@ -18,7 +18,7 @@ public class HobbyService {
     private final MemberService memberService;
     public void save(HobbyRequest request){
 //        Member byId = memberService.findById(request.getMemberId());
-        Hobby hobby = new Hobby(null, request.getName(), null);
+        Hobby hobby = new Hobby(null, request.getName());
         Store.hobbies.add(hobby);
 //        byId.getHobbies().add(hobby);
     }
@@ -32,9 +32,12 @@ public class HobbyService {
         new MemberHobby(member, hobby);
     }
 
-//    public List<HobbyResponse> findByLikeName(String name){
-//
-//    }
+    public List<HobbyResponse> findByLikeName(String name){
+        return Store.hobbies.stream()
+                .filter(h -> h.getName().contains(name))
+                .map(h -> new HobbyResponse(h))
+                .toList();
+    }
 
 
 }
