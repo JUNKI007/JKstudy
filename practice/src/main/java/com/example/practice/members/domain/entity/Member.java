@@ -1,6 +1,6 @@
 package com.example.practice.members.domain.entity;
 
-import com.example.practice.members.domain.config.domain.entity.MemberLogin;
+import com.example.practice.config.domain.entity.MemberLogin;
 import com.example.practice.todos.domain.entity.Todo;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

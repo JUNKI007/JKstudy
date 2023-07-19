@@ -1,15 +1,15 @@
 package com.example.practice.members.service;
 
-import com.example.practice.members.domain.config.domain.entity.MemberLogin;
-import com.example.practice.members.domain.config.domain.repository.MemberLoginRepository;
+import com.example.practice.config.domain.entity.MemberLogin;
+import com.example.practice.config.repository.MemberLoginRepository;
 import com.example.practice.members.domain.entity.Member;
 import com.example.practice.members.repository.MemberRepository;
-import com.example.practice.members.request.LoginRequest;
-import com.example.practice.members.request.SignupRequest;
-import com.example.practice.members.response.LoginResponse;
+import com.example.practice.members.domain.request.LoginRequest;
+import com.example.practice.members.domain.request.SignupRequest;
+import com.example.practice.members.domain.response.LoginResponse;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +36,7 @@ class MemberServiceTest {
     private MemberLoginRepository memberLoginRepository;
 
     @BeforeEach
-    void init() {
+    void init(){
         String email = "1111";
         String password = "1234";
         LoginRequest loginRequest = new LoginRequest(email, password);
@@ -51,80 +51,83 @@ class MemberServiceTest {
     }
 
 
-
-
-
-
     @Test
     void insert() {
 
-        //given
+        // given
         String email = "ssss";
         String password = "1234";
         String name = "uuuu";
         Integer age = 10;
+        SignupRequest signupRequest =
+                new SignupRequest(email, password, name, age);
 
-        SignupRequest signupRequest = new SignupRequest(email, password, name, age);
-
-
-        //when
+        // when
         memberService.insert(signupRequest);
 
-
-        //then
+        // then
         List<Member> all = memberRepository.findAll();
-        assertThat(all).hasSize(1);
-        assertThat(all.get(0).getEmail()).isEqualTo(email);
+        assertThat(all).hasSize(2);
+        assertThat(all.get(1).getEmail()).isEqualTo(email);
 
     }
 
-
-
-
-    @Test @Transactional
-    void 기본로그인_멤버로그인_인서트_체크() {
-
-        //given
+    @Test
+    void 기본로그인() {
+        // given
         String email = "1111";
         String password = "1234";
         LoginRequest loginRequest = new LoginRequest(email, password);
-        Member member = new Member(null, email, password, "name", 10, null, null);
-        memberRepository.save(member);
 
-        //when
+        // when
         LoginResponse login = memberService.login(loginRequest);
 
-        //then
+        // then
         assertThat(login.age()).isEqualTo(10);
         assertThat(login.name()).isEqualTo("name");
         assertThat(login.id()).isNotNull();
-
-        List<MemberLogin> all = memberLoginRepository.findAll();
-        assertThat(all).hasSize(1);
-        assertThat(all.get(0).getMember()).isEqualTo(member);
-        assertThat(all.get(0).getCreateAt()).isBefore(LocalDateTime.now());
-        assertThat(all.get(0).getEndAt()).isAfter(LocalDateTime.now());
-
     }
-
 
     @Test
-    void 로그인시_없는유저() {
-        //given
-        String email = "11dd1133";
+    void 기본로그인_멤버로그인_인서트_체크() {
+
+        // given
+        String email = "1111";
         String password = "1234";
         LoginRequest loginRequest = new LoginRequest(email, password);
-//        Member member = new Member(null, email+333, password, "name", 10, null, null);
-//        memberRepository.save(member);
 
 
-        RuntimeException runtimeException = org.junit.jupiter.api.Assertions.assertThrows(
-                RuntimeException.class
-                , () -> memberService.login(loginRequest));
+        // when
+        LoginResponse login = memberService.login(loginRequest);
+        // find 2, login save 3
 
-
-        //then
-        assertThat(runtimeException).hasMessage("없는 유저");
+        // then
+        assertThat(login.age()).isEqualTo(10);
+        assertThat(login.name()).isEqualTo("name");
+        assertThat(login.id()).isNotNull();
+//      4
+        List<MemberLogin> all = memberLoginRepository.findAll();
+        assertThat(all).hasSize(1);
+//        5
+//        assertThat(all.get(0).getMember()).isEqual72To(member);
+        assertThat(all.get(0).getCreateAt()).isBefore(LocalDateTime.now());
+        assertThat(all.get(0).getEndAt()).isAfter(LocalDateTime.now());
     }
 
+    @Test
+    void 로그인시_없는_유저(){
+        // given
+        String email = "1111dd123";
+        String password = "1234";
+        LoginRequest loginRequest = new LoginRequest(email, password);
+        // when & then
+        RuntimeException runtimeException = Assertions.assertThrows(
+                RuntimeException.class
+                , () -> memberService.login(loginRequest));
+        assertThat(runtimeException).hasMessage("없는 유저");
+
+
+//       assertThatThrownBy(()->memberService.login(loginRequest))
+//               .hasMessage("없는 유저");
+    }
 }

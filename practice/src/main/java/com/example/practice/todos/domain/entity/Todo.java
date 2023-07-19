@@ -7,20 +7,16 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "todos")
+@Entity @Table(name = "todos")
 @AllArgsConstructor @NoArgsConstructor
 @Getter @Builder
-
-
 public class Todo {
-@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String content;
     private boolean isDone;
     private Integer likeCount;
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
 }

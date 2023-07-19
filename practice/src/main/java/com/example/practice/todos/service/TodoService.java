@@ -1,7 +1,8 @@
 package com.example.practice.todos.service;
 
+import com.example.practice.config.service.MemberLoginService;
 import com.example.practice.todos.repository.TodoRepository;
-import com.example.practice.todos.request.TodoRequest;
+import com.example.practice.todos.domain.request.TodoRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -9,8 +10,9 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class TodoService {
     private final TodoRepository todoRepository;
-
-    public void insert(TodoRequest todoRequest){
-        todoRepository.save(todoRequest.toEntity());
+    private final MemberLoginService memberLoginService;
+    public void insert(TodoRequest request){
+        memberLoginService.findByMember(request.getMemberId());
+        todoRepository.save(request.toEntity());
     }
 }
