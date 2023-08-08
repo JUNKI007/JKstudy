@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="count">알람띄우기</h1>
+    <button onclick="onclickEvent()">알람띄우기</button>
+    
+</body>
+<script>
+    let i = 0
+    function onclickEvent(){
+
+        alert("아침이에요")
+        i++;
+        document.getElementById("count").innerHTML = `${i}번 버튼이 눌렸습니다.`
+    }
+        //es6 이후 문법
+        const onclickEventA = () =>{
+        alert("아침이에요")
+        i++;
+        document.getElementById("count").innerHTML = `${i}번 버튼이 눌렸습니다.`
+        }
+        const students = [{num:1, name:"김수동"}, {num:23, name:"현수정"}]
+        const new김수동 = {...students[0]}
+        const new리스트 = [...students, {num:2, name:"김정수"}]
+        const isKimAdd = students.map((value, index, array)=> {
+            console.log(value,index,array)
+            return {...value, uskim:value.name.startsWith("김")
+            , num : value.name.startsWith("김")? value.num * 2 : value.num}
+        })
+        const filterKim = students.filter((value, index, array)=> value.name.startsWith("김"))
+        const findKim = students.find((value, index, array) => value.name.startsWith("김"))
+</script>
+</html>

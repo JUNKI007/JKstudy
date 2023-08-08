@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const data = [
+
+        [
+{
+"id": 3,
+"name": "채오성",
+"number": 9769
+},
+{
+"id": 14,
+"name": "이동명",
+"number": 8602
+},
+{
+"id": 15,
+"name": "이세인",
+"number": 8463
+},
+{
+"id": 17,
+"name": "정민균",
+"number": 8454
+},
+{
+"id": 8,
+"name": "김태홍",
+"number": 8302
+},
+{
+"id": 7,
+"name": "김태경",
+"number": 7221
+},
+{
+"id": 6,
+"name": "김지혜",
+"number": 7152
+},
+{
+"id": 12,
+"name": "양기석",
+"number": 7100
+},
+{
+"id": 23,
+"name": "이재명",
+"number": 6502
+},
+{
+"id": 4,
+"name": "김수동",
+"number": 5894
+},
+{
+"id": 16,
+"name": "이태웅",
+"number": 5854
+},
+{
+"id": 11,
+"name": "안재원",
+"number": 4438
+},
+{
+"id": 5,
+"name": "김정수",
+"number": 4337
+},
+{
+"id": 18,
+"name": "정준기",
+"number": 3939
+},
+{
+"id": 10,
+"name": "박준제",
+"number": 3812
+},
+{
+"id": 19,
+"name": "최영준",
+"number": 3571
+},
+{
+"id": 9,
+"name": "박경희",
+"number": 3028
+},
+{
+"id": 21,
+"name": "허하나",
+"number": 2183
+},
+{
+"id": 13,
+"name": "왕경훈",
+"number": 2022
+},
+{
+"id": 22,
+"name": "현수정",
+"number": 1653
+},
+{
+"id": 1,
+"name": "이태열",
+"number": 1497
+},
+{
+"id": 2,
+"name": "이도경",
+"number": 872
+},
+{
+"id": 20,
+"name": "최웅진",
+"number": 232
+}
+]
+
+        ]
+        const filteredData = data[0].filter(item => item.name.includes('김'));
+        console.log(filteredData);
+
+
+        console.log(data.filter(el=> el.name.startsWith("김")))
+
+        // const addIsKim = data.map(el => {
+        //     if(el.name.startsWith("김")){
+        //         return{...el, iskim:true}
+        //     }else{
+        //         return{...el, iskim:false}
+        //     }
+        // })
+
+
+        const addIsKim = data.map(el => {
+           return {...el, iskim:el.name.startsWith("김")}
+        })
+
+        const idSort = data.sort((a, b) => a.id- b,id)
+        const idSortDesc = data.sort((a,b) => -a.id + b.id)
+        const addIsKim1 = data.map(el => ({ ...el, iskim:el.name.startsWith("김")
+    , id: el.name.startsWith("김") ? el.id * 2 : el.id}))
+
+
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>계산기</title>
+</head>
+
+<body>
+  
+    <input id="num">
+    <button onclick="clearInput()">Clear</button>
+    <button onclick="calculate()">계산하기</button>
+
+    <div>
+    <button onclick="insertValue(event)">1</button>
+    <button onclick="insertValue(event)">2</button>
+    <button onclick="insertValue(event)">3</button>
+    <br>
+    <button onclick="insertValue(event)">4</button>
+    <button onclick="insertValue(event)">5</button>
+    <button onclick="insertValue(event)">6</button>
+    <br>
+    <button onclick="insertValue(event)">7</button>
+    <button onclick="insertValue(event)">8</button>
+    <button onclick="insertValue(event)">9</button>
+    <br>
+    <button onclick="insertValue(event)">0</button>
+    <button onclick="insertValue(event)">+</button>
+    <button onclick="insertValue(event)">-</button>
+    <button onclick="insertValue(event)">*</button>
+    <button onclick="insertValue(event)">/</button>
+    <br>
+
+    <div style="margin-top: 30px; display:inline-block; border: 2px solid black; padding: 10px;">
+        <h1 id="resultValue">값 :</h1>
+    </div>
+
+    <script>
+        let numInput = document.getElementById("num");
+        let resultValue = document.getElementById("resultValue");
+
+        function insertValue(event) {
+            let button = event.target;
+            numInput.value += button.textContent;
+        }
+
+        function clearInput() {
+            numInput.value = '';
+        }
+
+        function calculate() {
+            const result = new Function('return ' + numInput.value)();
+            resultValue.textContent = "값 : " + result;
+        }
+    </script>
+
+</body>
+
+</html>

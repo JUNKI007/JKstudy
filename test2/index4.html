@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+// es6
+
+        function sum(a, b){
+            return a + b
+        }
+
+        const sum1 = (a, b) => a + b
+
+        function minus(a, b){
+            console.log(a, b)
+            return a - b
+        }
+
+        const minus1 = (a, b) => {
+            console.log(a, b)
+            return a- b
+        }
+
+        setTimeout(function(){
+            alert("a")
+        },1000)
+        setTimeout(()=>{
+            alert("a")
+        }, 1000)
+    
+
+
+        //spread 연산자
+        const arr = [1,2,3,4,5]
+        const arr1 = ()=>{
+        const tmp = [0]
+        for(let index = 0; index < arr.length; index++){
+            const element = arr[index];
+            tmp.push(element)
+            }
+        return tmp
+        }
+        const arr2 = [0, ...arr]
+        const user = {name: "park", age : 20}
+        const nUser = {id: 1, ...user}
+
+
+        for(let a of arr){
+            console.log(a)
+        }
+        arr.forEach((a, index, array) => console.log(a, index, array))
+
+        const sum3 = (a, b=3) => a+b
+        const arr3 = arr.map((el, index, array)=> el*2)
+
+        const arr4 = arr.filter(el => el%2 === 0)
+        const arr5 = arr.find(el => el%2 ===0)
+    </script>
+    
+</body>
+</html>

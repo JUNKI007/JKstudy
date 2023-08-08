@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <p id="hi">안녕하세요</p>
+    <button id="changeBtn" onclick="changeAction">change</button>
+    <p id="drag">0</p> -->
+
+
+
+    <p id="hi">안녕하세요</p>
+    <button id="changeBtn" onclick="changeAction">change</button>
+    <p id="drag">0</p>
+    <p>비밀번호</p>
+    <input id ="pw">
+    <p>비밀번호 확인</p>
+    <input id ="pw1" onfocusout="checkFunc()">
+    <button onclick="checkFunc()">확인</button>
+    <p id="check"></p>
+    <ul id ="list">
+        <li>1</li>
+    </ul>
+</body>
+<script>
+    // alert("aaa")
+
+    const list = ["네이버", "카카오", "토스"]
+    for(let i=0; i<list.length; i++){
+        const ul = document.getElementById("list")
+        const li = document.createElement('li')
+        console.log(li)
+        li.innerHTML = list[i]
+        ul.appendChild(li)
+    }
+
+
+
+//비밀번호 동일 여부 파악하기
+    function checkFunc(){
+        if(document.getElementById("pw").value === document.getElementById("pw1").value){
+            document.getElementById("check").innerHTML= "같습니다"
+        }else{
+            document.getElementById("check").innerHTML= "다릅니다"
+        }
+    }
+
+
+
+    
+
+
+// 버튼 누를때 작동
+    // console.log(document.getElementById("pw"))
+    // console.log(document.getElementById("hi").innerText)
+    // document.getElementById("changeBtn").addEventListener('click', function(){
+
+    //     const hi = document.getElementById("hi")
+    //     if(hi.innerText === 'hi'){
+    //         hi.innerHTML = '안녕하세요'
+    //     }else{
+    //         hi.innerHTML = 'hi'
+    //     }
+        // // document.getElementById("hi").innerHTML='hi'
+    // })
+
+
+
+//x 마우스 올려두었을때 작동
+    // console.log(document.getElementById("hi"))
+    // document.getElementById("changeBtn").addEventListener('mouseover', function(){
+
+    //     const hi = document.getElementById("hi")
+    //     if(hi.innerText === 'hi'){
+    //         hi.innerHTML = '안녕하세요'
+    //     }else{
+    //         hi.innerHTML = 'hi'
+    //     }
+
+    // })
+
+
+//메소드 만들어서 하기
+    // function changeAction(){
+    //     console.log(document.getElementById("pw").innerText)
+    //     const hi = document.getElementById("hi")
+    //     if(hi.innerText === 'hi'){
+    //         hi.innerHTML = '안녕하세요'
+    //     }else{
+    //         hi.innerHTML = 'hi'
+    //         }
+    //     }
+    
+
+//값이 변하게하기
+    // function changeAction(){
+    //     console.log(document.getElementById("pw").value)
+    //     const hi = document.getElementById("hi")
+    //     if(hi.innerText === 'hi'){
+    //         hi.innerHTML = '안녕하세요'
+    //     }else{
+    //         hi.innerHTML = 'hi'
+    //         }
+    //     }
+
+
+
+//드래그해서 숫자 올라가게하기
+    // console.log(document.getElementById("pw"))
+    // document.getElementById("drag").addEventListener('drag', function(){
+    //         const drag = document.getElementById("drag")
+    //         drag.innerHTML = Number(drag.innerText) + 1
+
+    //     })
+
+
+
+
+
+</script>
+</html>

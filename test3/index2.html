@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type = "number" id="num">
+    <button onclick="check()">확인</button>
+    <div id="box">
+
+    </div>
+    <script>
+        const check = () => {
+            const num = document.getElementById("num").value
+            alert(num)
+            const box = document.getElementById("box")
+            const p = document.createElement("div")
+            p.innerHTML = num
+            console.log(p)
+            box.appendChild(p)
+        }
+    </script>
+    
+</body>
+</html>

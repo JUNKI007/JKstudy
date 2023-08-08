@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id = "box">
+        <input id="uId">
+        <input id="uPw">
+        <button onclick="login()">로그인</button>
+    </div>
+
+    <script>
+        const user = { uId: "jeong", uPw: "1234" };
+        const users = [user, {uId:"lee", uPw:"1234"}, {uId:"kim", uPw:"1234"}]
+
+        function login() {
+            const uid = document.getElementById("uId").value;
+            const upw = document.getElementById("uPw").value;
+
+            check(uid, upw);
+        }
+
+        // const login = () => {
+        //     const uid = document.getElementById("uId").value;
+        //     const upw = document.getElementById("uPw").value;
+
+        //     check(uid, upw);
+        // }
+
+
+
+        function check(uid, upw) {
+            for (let index = 0; index < users.length; index++){
+            if (uid === user.uId && upw === user.uPw) {
+                document.getElementById("box").innerHTML = `<p>${uid}환영합니다</p>` + 
+                "<button onclick='localClear()'>" + uid+ "clear</button>"
+                localStorage.setItem("uId", uid);
+                localStorage.setItem("uPw", upw);
+                }
+            }
+        }
+
+        //foreach로 바꾸기
+        const check = (uid, upw) => {
+            for (const user of users){
+            if (uid === user.uId && upw === user.uPw) {
+                document.getElementById("box").innerHTML = `<p>${uid}환영합니다</p>` + 
+                "<button onclick='localClear()'>" + uid+ "clear</button>"
+                localStorage.setItem("uId", uid);
+                localStorage.setItem("uPw", upw);
+                }
+            }
+        }
+
+
+        
+        //find로 바꾸기
+        // const user = users.find(u=>uid === u.uId && upw === u.uPw);
+        // if(user){
+        //         document.getElementById("box").innerHTML = `<p>${uid}환영합니다</p>` + 
+        //         "<button onclick='localClear()'>" + uid+ "clear</button>"
+        //         localStorage.setItem("uId", uid);
+        //         localStorage.setItem("uPw", upw);
+        //         return
+        //         }
+
+
+        const check = (uid, upw) => {
+            for (let index = 0; index < users.length; index++){
+            if (uid === user.uId && upw === user.uPw) {
+                document.getElementById("box").innerHTML = `<p>${uid}환영합니다</p>` + 
+                "<button onclick='localClear()'>" + uid+ "clear</button>"
+                localStorage.setItem("uId", uid);
+                localStorage.setItem("uPw", upw);
+                }
+            }
+        }
+
+        function localClear(){
+            localStorage.clear()
+            location.href = "index2.html"
+            // window.location.reload()
+        }
+
+  
+    
+    check(localStorage.getItem("uId"), localStorage.getItem("uPw"))
+
+
+    </script>
+</body>
+</html>

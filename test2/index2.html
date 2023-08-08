@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <input id="text" onkeydown="addFunc(event)">
+    <!-- <button id="add" onclick="addFunc()">add</button> -->
+    <ul id="textList">
+        
+    </ul>
+
+    <label>이름</label>
+    <input id = "name">
+    <label>나이</label>
+    <input id = "age" type="number">
+    <button onclick="rowAdd()">추가</button>
+    <button onclick="clearBody()">clear</button>
+    <table id="tbl">
+        <thead>
+        <td>name</td>
+        <td>age</td>
+    </thead>
+    <tbody id = "body">
+
+    </tbody>
+    </table>
+    <p id="sid"></p>
+
+    <script>
+
+//내가 만든것
+        // function addFunc(){
+        // const ul = document.getElementById("textList")
+        // const li = document.createElement('li')
+        // li.innerHTML = document.getElementById("text").value
+        // ul.appendChild(li)
+
+
+        // function addFunc(event){
+        //     console.log(event)
+        //     const text = document.getElementById("text")
+        //     if(event.key ==='Enter'){
+        //         // if(event.keyCode === 13){
+        //     const li  = document.createElement("li")
+        //     li.innerHTML = text.value
+        //     document.getElementById("textList").appendChild(li)
+        //     text.value = ''
+        //     }
+        // }
+
+        document.getElementById("sid").innerText = localStorage.getItem("id")
+        document.cookie = "username=jeong;"
+
+        const persons = []
+        function rowAdd(){
+            const name = document.getElementById("name").value;
+            const age = document.getElementById("age").value;
+            persons.push({name: name, age: age})
+
+            const tr = document.createElement("tr");
+            const tdName = document.createElement("td")
+            const tdAge = document.createElement("td")
+
+            tdName.innerHTML = name;
+            tdAge.innerHTML = age;
+            if(persons.length % 2 === 0){
+            tr.style.color = "red"
+            }else{
+            tr.style.color = "green"
+            }
+            tr.appendChild(tdName);
+            tr.appendChild(tdAge);
+
+
+            document.getElementById("body").appendChild(tr)
+            }
+
+
+
+
+        function clearBody(){
+            document.getElementById("body").innerHTML = ""
+        }
+
+
+
+        //tomcat session, cookie
+        // sessionStorage.setItem("key", "value")
+
+
+    </script>
+    
+</body>
+</html>
