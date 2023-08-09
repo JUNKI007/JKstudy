@@ -9,7 +9,7 @@
     <h1>학생 정보</h1>
     <select id="size">
         <option value="2">2</option>
-        <option value="4">4</option>
+        <option value="4" selected>4</option>
         <option value="6">6</option>
         <option value="8">8</option>
         <option value="10">10</option>
@@ -17,9 +17,11 @@
     <button onclick="setSize()">사이즈</button>
     <table>
         <thead>
-            <th>id</th>
-            <th>name</th>
-            <th>number</th>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>number</th>
+            </tr>
         </thead>
         <tbody id="body">
 
@@ -29,60 +31,79 @@
         
     </div>
     <script>
-        let page = 1
-        let size = 4
-        const students = {}
-        
-        const getData = async (page = 0) =>{
-            if(students[page]){
-                return students[page]
+        let page = 1;
+        let size = 4;
+        const students = {};
+        const state = { students: {}, page: 1, size: 4 };
+
+        const getData = async (page = 0) => {
+            const { students, size } = state;
+            if (students[page]) {
+                return students[page];
             }
             const response = await fetch(
-                `http://192.168.0.184:8080/api/v1/member?page=${page}`)
-            const body = await response.json() 
-            students[page] = body
-            return body
-        }
+                `http://192.168.0.184:8080/api/v1/member?page=${page}&size=${size}`
+            );
+            const body = await response.json();
+            students[page] = body;
+            return body;
+        };
+
         const makeButtons = (totalPages) => {
-            const btns = document.getElementById("btns")
-            for(let i=0; i< totalPages; i++){
-                const btn = document.createElement("button")
-                // <button></button>
-                btn.innerText = i + 1
-                // <button>1</button>
-                btn.addEventListener("click", ()=>changePage(i))
-                // <button onclick="getData(1)">1</button>
-                btns.appendChild(btn)
+            const btns = document.getElementById("btns");
+            btns.innerHTML = '';
+            for (let i = 0; i < totalPages; i++) {
+                const btn = document.createElement("button");
+                btn.innerText = i + 1;
+                btn.addEventListener("click", () => changePage(i));
+                btns.appendChild(btn);
             }
-        }
-        const changePage = async (i)=>{
-            const students =  await getData(i)
-            makeBody(students.content)
-        }
-        const makeBody = (content) =>{
-            const body = document.getElementById("body")
-            body.innerHTML = ''
+        };
+
+        const changePage = async (i) => {
+            const students = await getData(i);
+            makeBody(students.content);
+        };
+
+        const makeBody = (content) => {
+            const body = document.getElementById("body");
+            body.innerHTML = '';
             content.forEach(element => {
                 body.innerHTML += 
                 `<tr>
                     <td>${element.id}</td>
                     <td>${element.name}</td>
                     <td>${element.number}</td>
-                    </tr>`
+                </tr>`;
             });
-        }
-        const init = async () => {
-            const {totalPages, content} = await getData()
-            makeButtons(totalPages)
-            makeBody(content)
-        }
-        const setSize = () => {
-            const {value} = document.getElementById("size")
-            console.log(value)
-        }
+        };
 
+                const init = async () => {
+            const { totalPages, content } = await getData();
+            makeButtons(totalPages);
+            makeBody(content);
+            
+            const searchName = localStorage.getItem("searchName");
+            if (searchName) {
+                const nameCells = document.querySelectorAll("#body td:nth-child(2)");
+                nameCells.forEach(nameCell => {
+                    content.forEach(element => {
+                        if (element.name === searchName) {
+                            nameCell.style.color = "red"; // 검색어와 일치하는 이름의 글씨 색깔 변경
+                        }
+                    });
+                });
+            }
+        };  
+
+        const setSize = () => {
+            const { value } = document.getElementById("size");
+            state.students = {};
+            state.size = value;
+            init();
+        };
         
-        init()
+        init();
     </script>
 </body>
 </html>

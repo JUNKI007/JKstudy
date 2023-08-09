@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>검색 페이지</title>
+</head>
+<body>
+    <input id="name">
+    <button id="searchMember">검색</button>
+
+    <script>
+        function searchMember() {
+            const searchName = document.getElementById("name").value;
+            localStorage.setItem("searchName", searchName);
+            location.href = "index4.html";
+        }
+    </script>
+</body>
+</html>

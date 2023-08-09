@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="getData()">getData</button>
+    <h1>학생 정보 데이터</h1>
+
+
+
+
+</body>
+<script>
+    const getData = async () => {
+        const response = await fetch(
+            "http://192.168.0.184:8080/api/v1/member?page=1"
+            )
+        console.log(response)
+        const members = await response.json()
+        console.log(members)
+        console.log(members.totalPages, members.content)
+    }
+
+</script>
+</html>
